@@ -25,6 +25,7 @@ class SidonNode(Node):
                 self._forward_token(outbox_actions, message.action_id)
 
         elif msg_type == "TOKEN":
+            print(f"[WALK] Node {self.node_id} received token from {sender_id}")
             if sender_id and sender_id in self.unvisited_neighbors:
                 self.unvisited_neighbors.remove(sender_id)
 
@@ -35,6 +36,9 @@ class SidonNode(Node):
             self._forward_token(outbox_actions, message.action_id)
 
         elif msg_type == "RETURN":
+            print(
+                f"[WALK] Node {self.node_id} got token back (backtracking) from {sender_id}"
+            )
             if sender_id and sender_id in self.unvisited_neighbors:
                 self.unvisited_neighbors.remove(sender_id)
             self._forward_token(outbox_actions, message.action_id)
