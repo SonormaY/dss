@@ -26,9 +26,9 @@ class AwerbuchNode(Node):
                     )
 
         elif msg_type == "CONNECT":
-            print(f"[TREE] Node {self.node_id} accepted {sender_id} as Parent")
             if self.parent is None:
                 self.parent = sender_id
+                print(f"[TREE] Node {self.node_id} accepted {sender_id} as Parent")
                 outbox_actions.append(
                     self._create_msg(sender_id, "ACCEPT", message.action_id)
                 )
